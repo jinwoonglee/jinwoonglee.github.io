@@ -1,0 +1,208 @@
+:root {
+  --side-bg: #1C2B28;
+  --side-text: #F1EFE8;
+  --side-muted: #B9C3BE;
+  --side-link: #9FD9C9;
+  --bg: #FAFAF7;
+  --text: #1F2A27;
+  --muted: #55605C;
+  --rule: #E3E6E1;
+  --accent: #1F6F63;
+  --abstract-bg: #EEF1EC;
+  --serif: "IBM Plex Serif", Georgia, serif;
+  --sans: "IBM Plex Sans", system-ui, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 400 16px/1.65 var(--sans);
+}
+
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.sidebar :focus-visible { outline-color: var(--side-link); }
+
+.icon {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ---------- Sidebar (top block below 900px) ---------- */
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  padding: 40px 16px 28px;
+  background: var(--side-bg);
+  color: var(--side-text);
+}
+
+.name { margin: 0; font: 600 30px/1.2 var(--serif); }
+.position { margin: 12px 0 0; }
+.fields { margin: 12px 0 0; color: var(--side-muted); font-size: 14px; }
+
+.profile-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.profile-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid rgba(159, 217, 201, 0.45);
+  border-radius: 999px;
+  color: var(--side-link);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.page-nav { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 16px; }
+
+.page-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--side-text);
+  text-decoration: none;
+}
+
+.profile-links a:hover, .page-nav a:hover { text-decoration: underline; }
+
+.updated { margin: 16px 0 0; color: var(--side-muted); font-size: 13px; }
+
+/* ---------- Main content ---------- */
+
+.content { padding: 48px 16px 64px; }
+.content > section { max-width: 720px; }
+section + section { margin-top: 64px; }
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 0 0 24px;
+  color: var(--accent);
+  font: 600 13px/1 var(--sans);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.section-title::after { content: ""; flex: 1; height: 1px; background: var(--rule); }
+
+.intro { margin: 0; }
+
+.group-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin: 40px 0 0;
+  font: 600 18px/1.3 var(--serif);
+}
+
+.section-title + .group-title, .columns .group-title { margin-top: 0; }
+
+.tag {
+  padding: 3px 8px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  color: var(--muted);
+  font: 500 12px/1 var(--sans);
+}
+
+.papers, .entries { margin: 0; padding: 0; list-style: none; }
+.papers > li { padding: 20px 0; }
+.entries > li { padding: 12px 0; }
+.papers > li + li, .entries > li + li { border-top: 1px solid var(--rule); }
+
+.paper-title { margin: 0; font: 600 20px/1.35 var(--serif); }
+.coauthors { margin: 6px 0 0; color: var(--muted); }
+.venue { margin: 4px 0 0; }
+
+.actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+
+/* The <details> box is dropped so its summary and abstract become items of the
+   button row; the buttons are ordered first, so the open abstract wraps below
+   the whole row at full width. */
+.actions details { display: contents; }
+.actions > *, .actions summary { order: -1; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  color: var(--accent);
+  font: 500 14px/1 var(--sans);
+  text-decoration: none;
+  list-style: none;
+  cursor: pointer;
+}
+
+.btn::-webkit-details-marker { display: none; }
+.btn .icon { width: 14px; height: 14px; }
+.btn:hover { background: var(--abstract-bg); }
+details[open] > .btn { background: var(--accent); color: var(--bg); }
+
+.abstract {
+  flex-basis: 100%;
+  padding: 16px 20px;
+  border-radius: 10px;
+  background: var(--abstract-bg);
+  font-size: 15px;
+}
+
+.abstract p { margin: 0; }
+
+.columns { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 32px 48px; }
+
+/* ---------- 900px and wider: fixed sidebar + content ---------- */
+
+@media (min-width: 900px) {
+  .layout { display: grid; grid-template-columns: 360px minmax(0, 1fr); }
+
+  .sidebar {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 64px 44px 32px;
+  }
+
+  .profile-links { display: block; margin-top: 32px; }
+
+  .profile-links a {
+    min-height: 0;
+    padding: 6px 0;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .page-nav { flex-direction: column; gap: 0; margin-top: 28px; }
+  .page-nav a { min-height: 0; padding: 6px 0; }
+
+  .updated { margin-top: auto; padding-top: 32px; }
+
+  .content { padding: 72px clamp(24px, 7vw, 100px) 96px; }
+  section + section { margin-top: 72px; }
+  .btn { min-height: 36px; }
+}
