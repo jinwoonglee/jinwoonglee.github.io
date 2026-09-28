@@ -47,7 +47,6 @@ body {
 }
 
 .name { margin: 0; font: 600 30px/1.2 var(--serif); }
-.position { margin: 12px 0 0; }
 .fields { margin: 12px 0 0; color: var(--side-muted); font-size: 14px; }
 
 .profile-links {
