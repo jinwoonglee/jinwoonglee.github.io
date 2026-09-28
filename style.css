@@ -128,7 +128,6 @@ section + section { margin-top: 64px; }
 .papers, .entries { margin: 0; padding: 0; list-style: none; }
 .papers > li { padding: 20px 0; }
 .entries > li { padding: 12px 0; }
-.dates { white-space: nowrap; }
 .papers > li + li, .entries > li + li { border-top: 1px solid var(--rule); }
 
 .paper-title { margin: 0; font: 600 20px/1.35 var(--serif); }
